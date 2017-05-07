@@ -10,7 +10,7 @@ const bot = new builder.UniversalBot(connector);
 // Handle messages
 bot.dialog('/', (session) => {
   console.log(session.message.user.name + ' said:' + session.message.text);
-  session.send('hey!')
+  session.send('hey!');
 });
 
 // Initialize server
