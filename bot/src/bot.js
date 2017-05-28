@@ -1,27 +1,12 @@
 const restify = require('restify');
-const builder = require('botbuilder');
 const config = require('./config.js');
-const chalk = require('chalk');
-
-const connector = new builder.ChatConnector(
-    {appId: config.appId, appPassword: config.appPassword});
-
-const bot = new builder.UniversalBot(connector);
+var botMaker = require('./bot_setup.js');
 var spawn = require('child_process').spawn;
 var cmd = 'pagekite.py';
 
 // Inherit stdio to preserve colored output
 var child = spawn(cmd, [config.port, config.pageKiteArgs], {stdio: 'inherit'});
-
-
-// Handle messages
-bot.dialog('/', (session) => {
-  console.log(
-      session.message.user.name + ' said:' +
-      '\"' + session.message.text + '\"');
-  session.send('hey!');
-});
-
+botMaker.makeBot(config.appId, config.appPassword, onMessage);
 process.on('SIGINT', function() {
   console.log("\nCaught interrupt signal, exiting...\n");
 
@@ -37,4 +22,11 @@ const server = restify.createServer();
 console.log("Server started...");
 
 server.listen(config.port);
-server.post('/', connector.listen());
+server.post('/', botMaker.connector.listen());
+
+function onMessage(session) {
+  console.log(
+      session.message.user.name + ' said:' +
+      '\"' + session.message.text + '\"');
+  session.send('hey!');
+}
