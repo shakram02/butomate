@@ -2,11 +2,18 @@
 
 Automate your home using FB chatbots. - Work in progress
 
-Your config file should contain a config object that has
+Your config file should be something like this:
 
-- your facebook appId
-- your facebook appPassword
-- your pageKite handle
-- and don't forget to export the config object `module.exports = config` (or whatever object name you choose)
+```js
+const config = {
+  appId: 'appId',
+  appPassword: 'appPassword',
+  pageKiteArgs: 'pageKiteArgs',
+  port: 0000    // Port number
+};
+
+module.exports = config;
+```
+
 you shouldn't share your config file,
 
