@@ -1,0 +1,16 @@
+"use strict";
+var path = require('path');
+var readline = require('readline');
+var readLine = readline.createInterface({ input: process.stdin, output: process.stdout });
+var rust_funcs = {
+    fibo: ['int', ['int']]
+};
+var ffi = require('ffi');
+// Import Rust functions
+var rust_lib = ffi.Library(path.join(__dirname, '/../../net_man/target/debug/libnet_man'), rust_funcs);
+// Use the function
+readLine.question('What fibo do you want? ', function (answer) {
+    console.log('The fibo is:' + rust_lib.fibo(parseInt(answer)));
+    readLine.close();
+});
+//# sourceMappingURL=net_talk.js.map
