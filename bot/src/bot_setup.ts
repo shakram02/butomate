@@ -5,7 +5,7 @@ import {
   Session
 } from 'botbuilder';
 
-export class BotFactory {
+export class ChatBot {
   public connector: ChatConnector;
   bot: UniversalBot;
 

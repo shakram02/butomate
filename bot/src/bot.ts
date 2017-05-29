@@ -1,40 +1,23 @@
-// const restify = require('restify');
-// const config = require('./config.js');
-// var botMaker = require('./bot_setup.js');
-import {ServerFactory} from './server_setup';
-import {BotFactory} from './bot_setup';
+import {LocalServer} from './server_setup';
+import {ChatBot} from './bot_setup';
 import {config} from './config';
 import {Session} from 'botbuilder';
-var spawn = require('child_process').spawn;
-var cmd = 'pagekite.py';
+import * as child_process from 'child_process';
+import {PageKiteLauncher} from './pagekite';
+import {ChatProxy} from './chatbot/chat_proxy';
 
-// Inherit stdio to preserve colored output
-var child =
-    spawn(cmd, [config.portNumber, config.pageKiteHandle], {stdio: 'inherit'});
-// botMaker.makeBot(config.appId, config.appPassword, onMessage);
-var botFactory = new BotFactory(config.appId, config.appPassword);
-botFactory.addDialog('/', onMessage);
+var pageKiteLauncher =
+    new PageKiteLauncher(config.portNumber, config.pageKiteHandle);
+var chatBot = new ChatBot(config.appId, config.appPassword);
+var chatProxy = new ChatProxy();
+var localServer = new LocalServer(config.portNumber);
 
-var serverFactory = new ServerFactory(config.portNumber);
-// serverFactory.init(botFactory.connector);
-serverFactory.server.listen(config.portNumber);
-serverFactory.server.post('/', botFactory.connector.listen());
+chatBot.addDialog('/', chatProxy.handleChatMessage);
+localServer.init(chatBot.connector);
+pageKiteLauncher.start();
 
 process.on('SIGINT', function() {
   console.log("\nCaught interrupt signal, exiting...\n");
-
-  if (child) {
-    child.kill();
-  }
+  pageKiteLauncher.killChild();
   process.exit();
 });
-
-// Initialize server
-console.log("Server started...");
-
-function onMessage(session: Session) {
-  console.log(
-      session.message.user.name + ' said:' +
-      '\"' + session.message.text + '\"');
-  session.send('heyllll!');
-}

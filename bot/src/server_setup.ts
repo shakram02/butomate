@@ -10,7 +10,7 @@ import {ChatConnector} from 'botbuilder';
 // };
 
 // module.exports = new ServerMaker();
-export class ServerFactory {
+export class LocalServer {
   public server: restify.Server;
   private portNumber: number;
   constructor(portNumber: number) {
