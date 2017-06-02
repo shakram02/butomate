@@ -1,1 +1,0 @@
-// Node will call the lib to send commands to Arduino, this binary can self-suffeciently send those commands
