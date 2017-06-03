@@ -1,0 +1,3 @@
+[submodule "rardnet"]
+	path = rardnet
+	url = git@github.com:shakram02/rardnet.git
