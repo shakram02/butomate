@@ -1,6 +1,6 @@
-import {Session} from 'botbuilder';
+import { Session } from 'botbuilder';
 export class ChatProxy {
-  constructor() {}
+  constructor() { }
 
   handleChatMessage(session: Session): void {
     let reply = ChatProxy.echoMessage(session);
@@ -9,6 +9,7 @@ export class ChatProxy {
   static echoMessage(session: Session): void {
     if (!session.message.text) return;
 
+    console.log(session.message.text);
     let date = new Date();
 
     let reply = ChatProxy.quoteText(session.message.text);
