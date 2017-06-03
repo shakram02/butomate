@@ -13,8 +13,8 @@ cd ..
 
 
 function config_reminder{
-echo -e "${YELLOW} ${BOLD} DONOT forget to setup your config.ts file${NC} the tutorial in README will help"  
-echo -e "${YELLOW} ${BOLD} A template is located at src/config.template.ts ${NC}"
+  echo -e "${YELLOW} ${BOLD} DONOT forget to setup your config.ts file${NC} the tutorial in README will help"
+  echo -e "${YELLOW} ${BOLD} A template is located at src/config.template.ts ${NC}"
 }
 
 function define_colors{
