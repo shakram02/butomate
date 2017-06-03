@@ -40,6 +40,6 @@ function build {
 
 clean
 build
-# (./build.sh)
-# echo -e "Starting project... "
-#node bot/src/build/bot.js
+
+echo -e "Starting project... "
+node bot/src/build/bot.js
