@@ -8,11 +8,12 @@ BOLD='\e[1m'
 SCRIPT_PATH=$( cd "$(dirname "$0")" ; pwd -P )
 BUTOMATE_PATH=$(dirname "$SCRIPT_PATH")
 BUILD_PATH="$BUTOMATE_PATH/bot/build"
+PROGNAME=$(basename "$0")
 
 function usage {
-  PROGNAME=$(basename "$0")
-  echo "$PROGNAME: usage: $PROGNAME [-b | --build] [-c | --clean]"
-  return
+  echo "usage:"
+  echo " $PROGNAME [-b | --build] [-c | --clean]"
+  echo " $PROGNAME -x | --execute <script>"
 }
 
 function clean {
@@ -30,7 +31,6 @@ function clean {
 }
 
 function build {
-  #set -x
   local SRC_PATH="$BUTOMATE_PATH/bot/src"
   echo -e "Building to:" "$BUILD_PATH" "${NC}"
   "$SCRIPT_PATH/build.sh" "$SRC_PATH" "$BUILD_PATH"
@@ -62,9 +62,18 @@ else
         shift
         clean
       ;;
+      -x | --execute)
+        # TODO: Run specific script, query ls -r and find the desired script
+        # clean
+        # build
+        
+        # echo -e "Running script... "
+        # node bot/build/bot.js
+      ;;
       *)
         # Error, invalid command argument
         echo "Error:Invalid command argument $1"
+        usage
         exit 1
       ;;
     esac
