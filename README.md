@@ -9,16 +9,17 @@ This application uses
 - [PageKite](https://pagekite.net/) for tunneling
 
 Your config file should be something like this:
+_A template is included in src/config.template.ts_
 
 ```js
 const config = {
-  appId: 'appId',   // Bot framework appId
-  appPassword: 'appPassword',   // Bot framework appPassword
+  appId: 'appId',   // Microsoft Bot framework appId
+  appPassword: 'appPassword',   // Microsoft  Bot framework appPassword
   pageKiteArgs: 'yourhandle.pagekite.me',
-  port: 0000    // Port number
+  port: 0000    // Port number a number more than 1024 and less than 65536
 };
 
 module.exports = config;
 ```
-
-After you're all set-up type-in `./run.sh`
+To install the dependencies for the first time, type-in `./scrip/bootstrap.sh`
+After you're all set-up type-in `./scrip/run.sh`
