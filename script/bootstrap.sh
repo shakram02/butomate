@@ -1,9 +1,6 @@
 # Setup new directory
 cd bot
 
-# Create an empty config file
-create_config
-
 # Install dependencies
 npm install
 
@@ -14,22 +11,14 @@ config_reminder
 cd ..
 ./run.sh
 
-function create_config{
-touch src/config.ts
-echo "import {BotConfig} from './bot_config';
-
-export const config: BotConfig = {
-  appId: 'appId',   // Microsoft app id
-  appPassword: 'password',  // Microsoft app password
-  pageKiteHandle: '***.pagekite.me', // Your handle
-  portNumber: 0000  // Port number
-};
-" >> config.ts
-}
 
 function config_reminder{
-YELLOW='\033[0;33m'
-NC='\033[0m' # No Color
-BOLD='\033[1m'
 echo -e "${YELLOW} ${BOLD} DONOT forget to setup your config.ts file${NC} the tutorial in README will help"  
+echo -e "${YELLOW} ${BOLD} A template is located at src/config.template.ts ${NC}"
+}
+
+function define_colors{
+  YELLOW='\033[0;33m'
+  NC='\033[0m' # No Color
+  BOLD='\033[1m'
 }
