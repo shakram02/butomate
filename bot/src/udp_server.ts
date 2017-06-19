@@ -24,14 +24,13 @@ class DatagramServer {
     startListening(): void {
         this.sock.bind(this.portNum, this.ip, () => {
             const address = this.sock.address();
-            console.log(`server listening ${address.address}:${address.port}`);
+            console.log(`server listening on ${address.address}:${address.port}`);
         });
     }
 
     private getIpAddr(): string {
-        var addresses = [];
-        var ifs = networkInterfaces();
-        var result = Object.keys(ifs)
+        let ifs = networkInterfaces();
+        let result = Object.keys(ifs)
             .map(x => ifs[x].filter(x => x.family === 'IPv4' && !x.internal)[0])
             .filter(x => x)[0].address;
         return result;
